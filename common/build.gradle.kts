@@ -17,6 +17,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(compose.material3)
+                api("com.google.zxing:core:3.5.1")
             }
         }
     }
