@@ -2,6 +2,9 @@ package org.sirekanyan.`fun`
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asSkiaBitmap
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import org.sirekanyan.`fun`.data.FunDatabase
 
 actual val platformName: String = "Desktop"
 
@@ -11,3 +14,8 @@ actual fun ImageBitmap.installMonochromePixels(pixels: BooleanArray) {
     }
     asSkiaBitmap().installPixels(bytes)
 }
+
+actual fun createSqlDriver(): SqlDriver =
+    JdbcSqliteDriver("jdbc:sqlite:fun.db").also { driver ->
+        FunDatabase.Schema.create(driver)
+    }

@@ -8,7 +8,7 @@ import androidx.compose.ui.window.application
 import org.sirekanyan.`fun`.ui.theme.DarkColorScheme
 
 fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
+    Window(onCloseRequest = ::exitApplication, title = "Function") {
         MaterialTheme(DarkColorScheme) {
             App()
         }

@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS item (
+  id TEXT NOT NULL PRIMARY KEY,
+  content TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM item;
+
+insertItem:
+INSERT INTO item (id, content) VALUES ?;
+
+deleteItem:
+DELETE FROM item WHERE id = ?;

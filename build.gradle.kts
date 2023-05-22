@@ -17,4 +17,5 @@ plugins {
     id("com.android.library") version androidPlugin apply false
     id("org.jetbrains.compose") version "1.4.0" apply false
     id("org.sirekanyan.version-checker") version "1.0.6" apply false
+    id("com.squareup.sqldelight") version "1.5.5" apply false
 }
