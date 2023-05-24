@@ -10,7 +10,7 @@ actual val platformName: String = "Desktop"
 
 actual fun ImageBitmap.installMonochromePixels(pixels: BooleanArray) {
     val bytes = ByteArray(pixels.size * 4) { index ->
-        if (pixels[index / 4] && index % 4 < 3) 0 else -1
+        if (pixels[index / 4] && index % 4 > 2) -1 else 0
     }
     asSkiaBitmap().installPixels(bytes)
 }
