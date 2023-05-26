@@ -17,23 +17,25 @@ import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.qrcode.QrCodeImage
 import org.sirekanyan.`fun`.qrcode.createQrCodeGradient
-import java.util.*
+import org.sirekanyan.`fun`.ui.layout.WindowWidthSizeClass
+import java.util.UUID
 import kotlin.math.abs
 import kotlin.random.Random
 
 @Composable
-fun App(colorScheme: ColorScheme) {
+fun App(colorScheme: ColorScheme, windowSizeClass: WindowWidthSizeClass) {
     MaterialTheme(colorScheme) {
-        AppContent()
+        AppContent(windowSizeClass)
     }
 }
 
 @Composable
-private fun AppContent() {
+private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
     val repository = remember { FunRepository() }
     val items by remember { repository.observeItems() }.collectAsState(listOf())
-    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-        Box(contentAlignment = Alignment.BottomEnd) {
+    AppLayout(
+        windowSizeClass = windowSizeClass,
+        content = {
             if (items.isNotEmpty()) {
                 MainContent(repository, items)
             } else {
@@ -43,12 +45,28 @@ private fun AppContent() {
                     QrCodeImage("https://sirekanyan.org/fun/$uuid", Modifier.background(gradient))
                 }
             }
+        },
+        fab = {
             FloatingActionButton(
                 onClick = { repository.putContent("$platformName Item ${abs(Random.nextInt()) % 1000}") },
                 modifier = Modifier.padding(16.dp),
             ) {
                 Icon(Icons.Filled.Add, null)
             }
+        }
+    )
+}
+
+@Composable
+private fun AppLayout(
+    windowSizeClass: WindowWidthSizeClass,
+    content: @Composable () -> Unit,
+    fab: @Composable () -> Unit,
+) {
+    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+        Box(contentAlignment = Alignment.BottomEnd) {
+            content()
+            fab()
         }
     }
 }
