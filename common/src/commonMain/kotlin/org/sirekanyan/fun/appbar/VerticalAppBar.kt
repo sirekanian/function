@@ -26,7 +26,7 @@ fun VerticalAppBar(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
-                modifier = Modifier.padding(top = D.fabPadding),
+                modifier = Modifier.padding(top = D.appBarFabPadding),
                 contentAlignment = Alignment.Center,
             ) {
                 fab()

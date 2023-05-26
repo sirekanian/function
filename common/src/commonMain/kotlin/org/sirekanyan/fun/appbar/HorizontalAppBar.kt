@@ -28,7 +28,7 @@ fun HorizontalAppBar(
             actions()
             Spacer(Modifier.weight(1f))
             Box(
-                modifier = Modifier.padding(end = D.fabPadding),
+                modifier = Modifier.padding(end = D.appBarFabPadding),
                 contentAlignment = Alignment.Center,
             ) {
                 fab()
