@@ -2,6 +2,7 @@ package org.sirekanyan.`fun`
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -14,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.sirekanyan.`fun`.appbar.HorizontalAppBar
+import org.sirekanyan.`fun`.appbar.VerticalAppBar
 import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.qrcode.QrCodeImage
 import org.sirekanyan.`fun`.qrcode.createQrCodeGradient
@@ -37,7 +40,7 @@ private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
         windowSizeClass = windowSizeClass,
         content = {
             if (items.isNotEmpty()) {
-                MainContent(repository, items)
+                MainContent(it, repository, items)
             } else {
                 val uuid = remember { UUID.randomUUID() }
                 val gradient = remember { createQrCodeGradient(uuid) }
@@ -46,10 +49,12 @@ private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
                 }
             }
         },
+        actions = {
+            // todo
+        },
         fab = {
             FloatingActionButton(
                 onClick = { repository.putContent("$platformName Item ${abs(Random.nextInt()) % 1000}") },
-                modifier = Modifier.padding(16.dp),
             ) {
                 Icon(Icons.Filled.Add, null)
             }
@@ -60,13 +65,21 @@ private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
 @Composable
 private fun AppLayout(
     windowSizeClass: WindowWidthSizeClass,
-    content: @Composable () -> Unit,
+    content: @Composable (PaddingValues) -> Unit,
+    actions: @Composable () -> Unit,
     fab: @Composable () -> Unit,
 ) {
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-        Box(contentAlignment = Alignment.BottomEnd) {
-            content()
-            fab()
+        if (windowSizeClass == WindowWidthSizeClass.Compact) {
+            content(PaddingValues(bottom = D.appBarSize))
+            Box(contentAlignment = Alignment.BottomCenter) {
+                HorizontalAppBar(actions = { actions() }, fab = { fab() })
+            }
+        } else {
+            content(PaddingValues(start = D.appBarSize))
+            Box(contentAlignment = Alignment.CenterStart) {
+                VerticalAppBar(actions = { actions() }, fab = { fab() })
+            }
         }
     }
 }

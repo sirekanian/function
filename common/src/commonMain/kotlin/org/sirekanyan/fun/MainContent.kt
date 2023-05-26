@@ -3,6 +3,7 @@ package org.sirekanyan.`fun`
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,11 +20,12 @@ import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.model.Item
 
 @Composable
-fun MainContent(repository: FunRepository, items: List<Item>) {
+fun MainContent(paddings: PaddingValues, repository: FunRepository, items: List<Item>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(paddings)
             .padding(vertical = 16.dp),
     ) {
         items.forEach { item ->
