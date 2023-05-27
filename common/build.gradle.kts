@@ -25,6 +25,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("com.squareup.sqldelight:android-driver:1.5.5")
+                implementation("androidx.activity:activity-compose:1.7.1")
             }
         }
         val desktopMain by getting {

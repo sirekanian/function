@@ -1,5 +1,6 @@
 package org.sirekanyan.`fun`
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asSkiaBitmap
 import com.squareup.sqldelight.db.SqlDriver
@@ -19,3 +20,8 @@ actual fun createSqlDriver(): SqlDriver =
     JdbcSqliteDriver("jdbc:sqlite:fun.db").also { driver ->
         FunDatabase.Schema.create(driver)
     }
+
+@Composable
+actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
+    // not applicable for this platform
+}

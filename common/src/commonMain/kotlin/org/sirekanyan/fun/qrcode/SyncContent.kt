@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.sirekanyan.`fun`.BackHandler
 import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.MainScreen
@@ -19,6 +20,9 @@ import java.util.UUID
 
 @Composable
 fun SyncContent(state: AppState) {
+    BackHandler {
+        state.screen = MainScreen
+    }
     val uuid = remember { UUID.randomUUID() }
     val gradient = remember { createQrCodeGradient(uuid) }
     Column(Modifier.fillMaxSize()) {
