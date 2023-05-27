@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.sirekanyan.`fun`.D
+import org.sirekanyan.`fun`.systemBarsPadding
 
 @Composable
 fun VerticalAppBar(
@@ -22,6 +23,7 @@ fun VerticalAppBar(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(D.appBarSize)
+                .systemBarsPadding()
                 .padding(vertical = D.appBarPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

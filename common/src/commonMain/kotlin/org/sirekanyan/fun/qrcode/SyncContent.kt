@@ -16,6 +16,7 @@ import org.sirekanyan.`fun`.BackHandler
 import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.MainScreen
+import org.sirekanyan.`fun`.systemBarsPadding
 import java.util.UUID
 
 @Composable
@@ -25,7 +26,7 @@ fun SyncContent(state: AppState) {
     }
     val uuid = remember { UUID.randomUUID() }
     val gradient = remember { createQrCodeGradient(uuid) }
-    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.fillMaxSize().systemBarsPadding()) {
         SmallToolbar(Icons.Default.ArrowBack, { state.screen = MainScreen }, "Synchronization")
         Box(Modifier.fillMaxSize().padding(16.dp), Alignment.Center) {
             QrCodeImage("https://sirekanyan.org/fun/$uuid", Modifier.background(gradient))

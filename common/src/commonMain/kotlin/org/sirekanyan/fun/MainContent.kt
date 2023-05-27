@@ -25,6 +25,7 @@ fun MainContent(paddings: PaddingValues, repository: FunRepository, items: List<
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .systemBarsPadding()
             .padding(paddings)
             .padding(vertical = 16.dp),
     ) {

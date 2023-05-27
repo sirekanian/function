@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.sirekanyan.`fun`.D
+import org.sirekanyan.`fun`.navigationBarsPadding
 
 @Composable
 fun HorizontalAppBar(
@@ -20,6 +21,7 @@ fun HorizontalAppBar(
     AppBarSurface {
         Row(
             modifier = Modifier
+                .navigationBarsPadding()
                 .fillMaxWidth()
                 .height(D.appBarSize)
                 .padding(horizontal = D.appBarPadding),

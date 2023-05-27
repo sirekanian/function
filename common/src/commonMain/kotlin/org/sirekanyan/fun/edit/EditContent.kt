@@ -3,8 +3,6 @@ package org.sirekanyan.`fun`.edit
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -25,8 +23,10 @@ import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.BackHandler
 import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.data.FunRepository
+import org.sirekanyan.`fun`.imePadding
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.MainScreen
+import org.sirekanyan.`fun`.systemBarsPadding
 
 @Composable
 fun EditContent(state: AppState, repository: FunRepository) {
@@ -35,7 +35,7 @@ fun EditContent(state: AppState, repository: FunRepository) {
     BackHandler {
         state.screen = MainScreen
     }
-    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.fillMaxSize().systemBarsPadding()) {
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = MainScreen },
@@ -58,8 +58,8 @@ fun EditContent(state: AppState, repository: FunRepository) {
                 value = draft,
                 onValueChange = { draft = it },
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 100.dp)
+                    .fillMaxSize()
+                    .imePadding()
                     .focusRequester(focusRequester),
                 placeholder = { Text("Put something here...") },
             )

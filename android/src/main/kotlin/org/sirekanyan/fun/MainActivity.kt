@@ -11,6 +11,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.view.WindowCompat
 import org.sirekanyan.`fun`.ui.layout.WindowWidthSizeClass
 import org.sirekanyan.`fun`.ui.theme.DarkColorScheme
 import org.sirekanyan.`fun`.ui.theme.LightColorScheme
@@ -18,6 +19,7 @@ import org.sirekanyan.`fun`.ui.theme.LightColorScheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             App(getColorScheme(), WindowWidthSizeClass.Compact)
         }

@@ -1,6 +1,7 @@
 package org.sirekanyan.`fun`
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asSkiaBitmap
 import com.squareup.sqldelight.db.SqlDriver
@@ -25,3 +26,12 @@ actual fun createSqlDriver(): SqlDriver =
 actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
     // not applicable for this platform
 }
+
+actual fun Modifier.imePadding(): Modifier =
+    this // not applicable for this platform
+
+actual fun Modifier.systemBarsPadding(): Modifier =
+    this // not applicable for this platform
+
+actual fun Modifier.navigationBarsPadding(): Modifier =
+    this // not applicable for this platform
