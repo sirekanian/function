@@ -15,3 +15,5 @@ sealed class AppScreen
 object MainScreen : AppScreen()
 
 object SyncScreen : AppScreen()
+
+object EditScreen : AppScreen()

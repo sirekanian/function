@@ -16,14 +16,14 @@ import androidx.compose.ui.Modifier
 import org.sirekanyan.`fun`.appbar.HorizontalAppBar
 import org.sirekanyan.`fun`.appbar.VerticalAppBar
 import org.sirekanyan.`fun`.data.FunRepository
+import org.sirekanyan.`fun`.edit.EditContent
 import org.sirekanyan.`fun`.model.AppState
+import org.sirekanyan.`fun`.model.EditScreen
 import org.sirekanyan.`fun`.model.MainScreen
 import org.sirekanyan.`fun`.model.SyncScreen
 import org.sirekanyan.`fun`.qrcode.SyncContent
 import org.sirekanyan.`fun`.ui.icons.DefaultQrCodeIcon
 import org.sirekanyan.`fun`.ui.layout.WindowWidthSizeClass
-import kotlin.math.abs
-import kotlin.random.Random
 
 @Composable
 fun App(colorScheme: ColorScheme, windowSizeClass: WindowWidthSizeClass) {
@@ -44,6 +44,7 @@ private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
             when (state.screen) {
                 MainScreen -> MainContent(it, repository, items)
                 SyncScreen -> SyncContent(state)
+                EditScreen -> EditContent(state, repository)
             }
         },
         actions = {
@@ -52,9 +53,7 @@ private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
             }
         },
         fab = {
-            FloatingActionButton(
-                onClick = { repository.putContent("$platformName Item ${abs(Random.nextInt()) % 1000}") },
-            ) {
+            FloatingActionButton({ state.screen = EditScreen }) {
                 Icon(Icons.Default.Add, null)
             }
         }

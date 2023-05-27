@@ -1,11 +1,13 @@
 package org.sirekanyan.`fun`.appbar
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +20,12 @@ import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.D
 
 @Composable
-fun SmallToolbar(icon: ImageVector, onIconClick: () -> Unit, title: String) {
+fun SmallToolbar(
+    icon: ImageVector,
+    onIconClick: () -> Unit,
+    title: String,
+    action: @Composable (() -> Unit)? = null,
+) {
     Row(
         modifier = Modifier.fillMaxWidth().height(D.smallToolbarSize),
         verticalAlignment = Alignment.CenterVertically,
@@ -33,5 +40,10 @@ fun SmallToolbar(icon: ImageVector, onIconClick: () -> Unit, title: String) {
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.fillMaxHeight().paddingFromBaseline(bottom = 24.dp),
         )
+        action?.let {
+            Spacer(Modifier.weight(1f))
+            action()
+            Spacer(Modifier.width(24.dp))
+        }
     }
 }
