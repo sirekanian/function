@@ -26,8 +26,9 @@ sealed class AppScreen {
 
 object MainScreen : AppScreen()
 
-class SyncScreen(initialPeer: UUID?) : AppScreen() {
-    var peer by mutableStateOf(initialPeer)
+class SyncScreen(initialPeerUuid: UUID?) : AppScreen() {
+    val myUuid: UUID = UUID.randomUUID()
+    var peerUuid: UUID? by mutableStateOf(initialPeerUuid)
 }
 
 object EditScreen : AppScreen()

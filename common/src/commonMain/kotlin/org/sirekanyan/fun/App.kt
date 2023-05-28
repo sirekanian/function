@@ -42,14 +42,14 @@ private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSiz
         state = state,
         windowSizeClass = windowSizeClass,
         content = {
-            when (state.screen) {
+            when (val screen = state.screen) {
                 is MainScreen -> MainContent(it, repository, items)
-                is SyncScreen -> SyncContent(state)
+                is SyncScreen -> SyncContent(state, screen)
                 is EditScreen -> EditContent(state, repository)
             }
         },
         actions = {
-            IconButton({ state.screen = SyncScreen(initialPeer = null) }) {
+            IconButton({ state.screen = SyncScreen(initialPeerUuid = null) }) {
                 Icon(DefaultQrCodeIcon, null)
             }
         },
