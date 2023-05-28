@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.BackHandler
+import org.sirekanyan.`fun`.ScanButton
 import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.MainScreen
@@ -27,7 +28,12 @@ fun SyncContent(state: AppState) {
     val uuid = remember { UUID.randomUUID() }
     val gradient = remember { createQrCodeGradient(uuid) }
     Column(Modifier.fillMaxSize().systemBarsPadding()) {
-        SmallToolbar(Icons.Default.ArrowBack, { state.screen = MainScreen }, "Synchronization")
+        SmallToolbar(
+            icon = Icons.Default.ArrowBack,
+            onIconClick = { state.screen = MainScreen },
+            title = "Synchronization",
+            action = { ScanButton() },
+        )
         Box(Modifier.fillMaxSize().padding(16.dp), Alignment.Center) {
             QrCodeImage("https://sirekanyan.org/fun/$uuid", Modifier.background(gradient))
         }

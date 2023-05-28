@@ -2,6 +2,8 @@ package org.sirekanyan.`fun`
 
 import android.content.Context
 import android.graphics.Color
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
@@ -31,6 +33,17 @@ actual fun createSqlDriver(): SqlDriver =
 @Composable
 actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
     AndroidBackHandler(enabled, onBack)
+}
+
+@Composable
+actual fun ScanButton() {
+    TextButton(
+        onClick = {
+            TODO("Not implemented yet")
+        },
+    ) {
+        Text("Scan")
+    }
 }
 
 actual fun Modifier.imePadding(): Modifier =

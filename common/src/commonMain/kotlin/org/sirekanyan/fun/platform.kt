@@ -14,6 +14,9 @@ expect fun createSqlDriver(): SqlDriver
 @Composable
 expect fun BackHandler(enabled: Boolean = true, onBack: () -> Unit)
 
+@Composable
+expect fun ScanButton()
+
 expect fun Modifier.imePadding(): Modifier
 
 expect fun Modifier.systemBarsPadding(): Modifier

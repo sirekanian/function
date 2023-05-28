@@ -27,6 +27,11 @@ actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
     // not applicable for this platform
 }
 
+@Composable
+actual fun ScanButton() {
+    // not applicable for this platform
+}
+
 actual fun Modifier.imePadding(): Modifier =
     this // not applicable for this platform
 
