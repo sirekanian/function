@@ -17,6 +17,7 @@ import org.sirekanyan.`fun`.appbar.HorizontalAppBar
 import org.sirekanyan.`fun`.appbar.VerticalAppBar
 import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.edit.EditContent
+import org.sirekanyan.`fun`.model.AppScreen
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.EditScreen
 import org.sirekanyan.`fun`.model.MainScreen
@@ -26,15 +27,15 @@ import org.sirekanyan.`fun`.ui.icons.DefaultQrCodeIcon
 import org.sirekanyan.`fun`.ui.layout.WindowWidthSizeClass
 
 @Composable
-fun App(colorScheme: ColorScheme, windowSizeClass: WindowWidthSizeClass) {
+fun App(screen: AppScreen, colorScheme: ColorScheme, windowSizeClass: WindowWidthSizeClass) {
     MaterialTheme(colorScheme) {
-        AppContent(windowSizeClass)
+        AppContent(screen, windowSizeClass)
     }
 }
 
 @Composable
-private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
-    val state = remember { AppState() }
+private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSizeClass) {
+    val state = remember { AppState(initialScreen) }
     val repository = remember { FunRepository() }
     val items by remember { repository.observeItems() }.collectAsState(listOf())
     AppLayout(
@@ -42,13 +43,13 @@ private fun AppContent(windowSizeClass: WindowWidthSizeClass) {
         windowSizeClass = windowSizeClass,
         content = {
             when (state.screen) {
-                MainScreen -> MainContent(it, repository, items)
-                SyncScreen -> SyncContent(state)
-                EditScreen -> EditContent(state, repository)
+                is MainScreen -> MainContent(it, repository, items)
+                is SyncScreen -> SyncContent(state)
+                is EditScreen -> EditContent(state, repository)
             }
         },
         actions = {
-            IconButton({ state.screen = SyncScreen }) {
+            IconButton({ state.screen = SyncScreen(initialPeer = null) }) {
                 Icon(DefaultQrCodeIcon, null)
             }
         },
