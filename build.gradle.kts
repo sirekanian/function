@@ -13,6 +13,7 @@ plugins {
     val androidPlugin = "8.0.1"
     kotlin("multiplatform") version kotlinVersion apply false
     kotlin("android") version kotlinVersion apply false
+    kotlin("plugin.serialization") version kotlinVersion apply false
     id("com.android.application") version androidPlugin apply false
     id("com.android.library") version androidPlugin apply false
     id("org.jetbrains.compose") version "1.4.0" apply false

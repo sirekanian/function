@@ -28,7 +28,7 @@ object HomeScreen : AppScreen()
 
 class SyncScreen(initialPeerUuid: UUID?) : AppScreen() {
     val myUuid: UUID = UUID.randomUUID()
-    var peerUuid: UUID? by mutableStateOf(initialPeerUuid)
+    val peerUuid: UUID? by mutableStateOf(initialPeerUuid)
 }
 
 object AddScreen : AppScreen()
