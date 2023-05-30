@@ -20,6 +20,10 @@ class FunRepository {
         queries.insertItem(Item(UUID.randomUUID().toString(), content))
     }
 
+    fun updateContent(id: String, content: String) {
+        queries.updateItem(id, content)
+    }
+
     fun delete(uuid: String) {
         queries.deleteItem(uuid)
     }

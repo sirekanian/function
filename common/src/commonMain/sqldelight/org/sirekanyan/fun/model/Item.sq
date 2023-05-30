@@ -9,5 +9,8 @@ SELECT * FROM item;
 insertItem:
 INSERT INTO item (id, content) VALUES ?;
 
+updateItem:
+UPDATE item SET content = ?2 WHERE id = ?1;
+
 deleteItem:
 DELETE FROM item WHERE id = ?;

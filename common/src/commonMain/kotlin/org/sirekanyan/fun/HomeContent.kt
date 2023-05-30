@@ -1,6 +1,7 @@
 package org.sirekanyan.`fun`
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,11 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import org.sirekanyan.`fun`.data.FunRepository
+import org.sirekanyan.`fun`.model.AppState
+import org.sirekanyan.`fun`.model.EditScreen
 import org.sirekanyan.`fun`.model.Item
 
 @Composable
-fun HomeContent(paddings: PaddingValues, repository: FunRepository, items: List<Item>) {
+fun HomeContent(paddings: PaddingValues, state: AppState, items: List<Item>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -31,9 +33,11 @@ fun HomeContent(paddings: PaddingValues, repository: FunRepository, items: List<
     ) {
         items.forEach { item ->
             Row(
-                modifier = Modifier
+                modifier = @OptIn(ExperimentalFoundationApi::class) Modifier
                     .fillMaxWidth()
-                    .clickable { repository.delete(item.id) }
+                    .combinedClickable(onClick = {}, onLongClick = {
+                        state.screen = EditScreen(item)
+                    })
                     .padding(horizontal = 24.dp, vertical = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {

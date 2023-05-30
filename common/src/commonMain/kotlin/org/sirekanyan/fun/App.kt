@@ -17,9 +17,11 @@ import org.sirekanyan.`fun`.appbar.HorizontalAppBar
 import org.sirekanyan.`fun`.appbar.VerticalAppBar
 import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.dialog.AddContent
+import org.sirekanyan.`fun`.dialog.EditContent
 import org.sirekanyan.`fun`.model.AddScreen
 import org.sirekanyan.`fun`.model.AppScreen
 import org.sirekanyan.`fun`.model.AppState
+import org.sirekanyan.`fun`.model.EditScreen
 import org.sirekanyan.`fun`.model.HomeScreen
 import org.sirekanyan.`fun`.model.SyncScreen
 import org.sirekanyan.`fun`.qrcode.SyncContent
@@ -43,9 +45,10 @@ private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSiz
         windowSizeClass = windowSizeClass,
         content = {
             when (val screen = state.screen) {
-                is HomeScreen -> HomeContent(it, repository, items)
+                is HomeScreen -> HomeContent(it, state, items)
                 is SyncScreen -> SyncContent(state, screen)
                 is AddScreen -> AddContent(state, repository)
+                is EditScreen -> EditContent(state, screen, repository)
             }
         },
         actions = {

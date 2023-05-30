@@ -32,3 +32,5 @@ class SyncScreen(initialPeerUuid: UUID?) : AppScreen() {
 }
 
 object AddScreen : AppScreen()
+
+class EditScreen(val initialItem: Item) : AppScreen()
