@@ -20,7 +20,7 @@ import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.model.Item
 
 @Composable
-fun MainContent(paddings: PaddingValues, repository: FunRepository, items: List<Item>) {
+fun HomeContent(paddings: PaddingValues, repository: FunRepository, items: List<Item>) {
     Column(
         modifier = Modifier
             .fillMaxSize()

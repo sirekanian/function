@@ -15,7 +15,7 @@ import org.sirekanyan.`fun`.BackHandler
 import org.sirekanyan.`fun`.ScanButton
 import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.model.AppState
-import org.sirekanyan.`fun`.model.MainScreen
+import org.sirekanyan.`fun`.model.HomeScreen
 import org.sirekanyan.`fun`.model.SyncScreen
 import org.sirekanyan.`fun`.sync.PeerIcon
 import org.sirekanyan.`fun`.systemBarsPadding
@@ -23,12 +23,12 @@ import org.sirekanyan.`fun`.systemBarsPadding
 @Composable
 fun SyncContent(state: AppState, screen: SyncScreen) {
     BackHandler {
-        state.screen = MainScreen
+        state.screen = HomeScreen
     }
     Column(Modifier.fillMaxSize().systemBarsPadding()) {
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
-            onIconClick = { state.screen = MainScreen },
+            onIconClick = { state.screen = HomeScreen },
             title = "Synchronization",
             action = { ScanButton() },
         )

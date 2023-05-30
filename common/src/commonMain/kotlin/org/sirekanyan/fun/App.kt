@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import org.sirekanyan.`fun`.appbar.HorizontalAppBar
 import org.sirekanyan.`fun`.appbar.VerticalAppBar
 import org.sirekanyan.`fun`.data.FunRepository
-import org.sirekanyan.`fun`.edit.EditContent
+import org.sirekanyan.`fun`.dialog.AddContent
+import org.sirekanyan.`fun`.model.AddScreen
 import org.sirekanyan.`fun`.model.AppScreen
 import org.sirekanyan.`fun`.model.AppState
-import org.sirekanyan.`fun`.model.EditScreen
-import org.sirekanyan.`fun`.model.MainScreen
+import org.sirekanyan.`fun`.model.HomeScreen
 import org.sirekanyan.`fun`.model.SyncScreen
 import org.sirekanyan.`fun`.qrcode.SyncContent
 import org.sirekanyan.`fun`.ui.icons.DefaultQrCodeIcon
@@ -43,9 +43,9 @@ private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSiz
         windowSizeClass = windowSizeClass,
         content = {
             when (val screen = state.screen) {
-                is MainScreen -> MainContent(it, repository, items)
+                is HomeScreen -> HomeContent(it, repository, items)
                 is SyncScreen -> SyncContent(state, screen)
-                is EditScreen -> EditContent(state, repository)
+                is AddScreen -> AddContent(state, repository)
             }
         },
         actions = {
@@ -54,7 +54,7 @@ private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSiz
             }
         },
         fab = {
-            FloatingActionButton({ state.screen = EditScreen }) {
+            FloatingActionButton({ state.screen = AddScreen }) {
                 Icon(Icons.Default.Add, null)
             }
         }
@@ -72,14 +72,14 @@ private fun AppLayout(
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         if (windowSizeClass == WindowWidthSizeClass.Compact) {
             content(PaddingValues(bottom = D.appBarSize))
-            AnimatedVisibility(state.isMain, Modifier, slideInVertically { it / 2 }, slideOutVertically { it / 2 }) {
+            AnimatedVisibility(state.isHome, Modifier, slideInVertically { it / 2 }, slideOutVertically { it / 2 }) {
                 Box(contentAlignment = Alignment.BottomCenter) {
                     HorizontalAppBar(actions = { actions() }, fab = { fab() })
                 }
             }
         } else {
             content(PaddingValues(start = D.appBarSize))
-            AnimatedVisibility(state.isMain, Modifier, slideInHorizontally(), slideOutHorizontally()) {
+            AnimatedVisibility(state.isHome, Modifier, slideInHorizontally(), slideOutHorizontally()) {
                 Box(contentAlignment = Alignment.CenterStart) {
                     VerticalAppBar(actions = { actions() }, fab = { fab() })
                 }

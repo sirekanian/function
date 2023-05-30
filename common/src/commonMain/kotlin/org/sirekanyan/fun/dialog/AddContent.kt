@@ -1,4 +1,4 @@
-package org.sirekanyan.`fun`.edit
+package org.sirekanyan.`fun`.dialog
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,26 +25,26 @@ import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.imePadding
 import org.sirekanyan.`fun`.model.AppState
-import org.sirekanyan.`fun`.model.MainScreen
+import org.sirekanyan.`fun`.model.HomeScreen
 import org.sirekanyan.`fun`.systemBarsPadding
 
 @Composable
-fun EditContent(state: AppState, repository: FunRepository) {
+fun AddContent(state: AppState, repository: FunRepository) {
     var draft by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     BackHandler {
-        state.screen = MainScreen
+        state.screen = HomeScreen
     }
     Column(Modifier.fillMaxSize().systemBarsPadding()) {
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
-            onIconClick = { state.screen = MainScreen },
+            onIconClick = { state.screen = HomeScreen },
             title = "Add function",
             action = {
                 TextButton(
                     onClick = {
                         repository.putContent(draft)
-                        state.screen = MainScreen
+                        state.screen = HomeScreen
                     },
                     enabled = draft.isNotEmpty()
                 ) {

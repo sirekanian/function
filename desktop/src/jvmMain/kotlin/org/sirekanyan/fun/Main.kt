@@ -10,14 +10,14 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import org.sirekanyan.`fun`.model.MainScreen
+import org.sirekanyan.`fun`.model.HomeScreen
 import org.sirekanyan.`fun`.ui.layout.WindowWidthSizeClass
 import org.sirekanyan.`fun`.ui.theme.DarkColorScheme
 
 fun main() = application {
     val windowState = rememberWindowState()
     Window(onCloseRequest = ::exitApplication, state = windowState, title = "Function") {
-        App(MainScreen, DarkColorScheme, rememberWindowSizeClass(windowState))
+        App(HomeScreen, DarkColorScheme, rememberWindowSizeClass(windowState))
     }
 }
 

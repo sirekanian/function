@@ -8,7 +8,7 @@ import java.util.UUID
 
 class AppState(initialScreen: AppScreen) {
     var screen by mutableStateOf<AppScreen>(initialScreen)
-    val isMain by derivedStateOf { screen is MainScreen }
+    val isHome by derivedStateOf { screen is HomeScreen }
 }
 
 sealed class AppScreen {
@@ -19,16 +19,16 @@ sealed class AppScreen {
             val uuid = uuidRegex.matchEntire(value)?.let { result ->
                 UUID.fromString(result.groupValues.first())
             }
-            return uuid?.let(::SyncScreen) ?: MainScreen
+            return uuid?.let(::SyncScreen) ?: HomeScreen
         }
     }
 }
 
-object MainScreen : AppScreen()
+object HomeScreen : AppScreen()
 
 class SyncScreen(initialPeerUuid: UUID?) : AppScreen() {
     val myUuid: UUID = UUID.randomUUID()
     var peerUuid: UUID? by mutableStateOf(initialPeerUuid)
 }
 
-object EditScreen : AppScreen()
+object AddScreen : AppScreen()
