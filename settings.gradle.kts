@@ -7,4 +7,4 @@ pluginManagement {
 }
 
 rootProject.name = "fun"
-include(":android", ":desktop", ":common")
+include(":android", ":desktop", ":common", ":mlkit")

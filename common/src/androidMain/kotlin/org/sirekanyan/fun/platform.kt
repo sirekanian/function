@@ -1,6 +1,8 @@
 package org.sirekanyan.`fun`
 
 import android.content.Context
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.graphics.Color
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -11,6 +13,7 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import org.sirekanyan.`fun`.data.FunDatabase
+import org.sirekanyan.`fun`.mlkit.QrScannerActivity
 import androidx.activity.compose.BackHandler as AndroidBackHandler
 import androidx.compose.foundation.layout.imePadding as androidImePadding
 import androidx.compose.foundation.layout.navigationBarsPadding as androidNavigationBarsPadding
@@ -39,7 +42,10 @@ actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
 actual fun ScanButton() {
     TextButton(
         onClick = {
-            TODO("Not implemented yet")
+            androidApplicationContext.startActivity(
+                Intent(androidApplicationContext, QrScannerActivity::class.java)
+                    .setFlags(FLAG_ACTIVITY_NEW_TASK)
+            )
         },
     ) {
         Text("Scan")
