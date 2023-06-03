@@ -1,16 +1,15 @@
 CREATE TABLE IF NOT EXISTS item (
-  id TEXT NOT NULL PRIMARY KEY,
-  content TEXT NOT NULL
+  id TEXT NOT NULL,
+  timestamp INTEGER NOT NULL,
+  content TEXT NOT NULL,
+  PRIMARY KEY (id, timestamp)
 );
 
 selectAll:
-SELECT * FROM item;
+SELECT id, MAX(timestamp) AS timestamp, content FROM item GROUP BY id;
 
 insertItem:
-INSERT INTO item (id, content) VALUES ?;
-
-updateItem:
-UPDATE item SET content = ?2 WHERE id = ?1;
+INSERT INTO item (id, timestamp, content) VALUES ?;
 
 deleteItem:
-DELETE FROM item WHERE id = ?;
+DELETE FROM item WHERE id = ? AND timestamp = ?;

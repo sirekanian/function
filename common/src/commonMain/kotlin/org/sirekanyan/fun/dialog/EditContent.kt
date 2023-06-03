@@ -39,7 +39,7 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
                 if (draft.text.isEmpty()) {
                     TextButton(
                         onClick = {
-                            repository.delete(item.id)
+                            repository.delete(item.id, item.timestamp)
                             state.screen = HomeScreen
                         },
                     ) {
@@ -48,7 +48,7 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
                 } else {
                     TextButton(
                         onClick = {
-                            repository.updateContent(item.id, draft.text)
+                            repository.putContent(item.id, draft.text)
                             state.screen = HomeScreen
                         },
                         enabled = item.content != draft.text

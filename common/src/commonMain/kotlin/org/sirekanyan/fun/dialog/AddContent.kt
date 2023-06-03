@@ -19,6 +19,7 @@ import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.HomeScreen
 import org.sirekanyan.`fun`.systemBarsPadding
+import java.util.*
 
 @Composable
 fun AddContent(state: AppState, repository: FunRepository) {
@@ -34,7 +35,7 @@ fun AddContent(state: AppState, repository: FunRepository) {
             action = {
                 TextButton(
                     onClick = {
-                        repository.putContent(draft.text)
+                        repository.putContent(UUID.randomUUID().toString(), draft.text)
                         state.screen = HomeScreen
                     },
                     enabled = draft.text.isNotEmpty()

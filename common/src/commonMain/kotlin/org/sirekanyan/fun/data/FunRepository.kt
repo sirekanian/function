@@ -6,7 +6,7 @@ import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.flow.Flow
 import org.sirekanyan.`fun`.createSqlDriver
 import org.sirekanyan.`fun`.model.Item
-import java.util.UUID
+import java.lang.System.currentTimeMillis
 
 class FunRepository {
 
@@ -14,18 +14,14 @@ class FunRepository {
     private val queries = FunDatabase(driver).itemQueries
 
     fun observeItems(): Flow<List<Item>> =
-        queries.selectAll().asFlow().mapToList()
+        queries.selectAll { id, timestamp, content -> Item(id, checkNotNull(timestamp), content) }.asFlow().mapToList()
 
-    fun putContent(content: String) {
-        queries.insertItem(Item(UUID.randomUUID().toString(), content))
+    fun putContent(id: String, content: String) {
+        queries.insertItem(Item(id, currentTimeMillis(), content))
     }
 
-    fun updateContent(id: String, content: String) {
-        queries.updateItem(id, content)
-    }
-
-    fun delete(uuid: String) {
-        queries.deleteItem(uuid)
+    fun delete(id: String, timestamp: Long) {
+        queries.deleteItem(id, timestamp)
     }
 
 }
