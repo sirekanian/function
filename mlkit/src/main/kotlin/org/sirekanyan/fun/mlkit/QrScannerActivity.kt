@@ -1,7 +1,9 @@
 package org.sirekanyan.`fun`.mlkit
 
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_VIEW
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +18,10 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode.FORMAT_QR_CODE
 import java.util.concurrent.Executors
+
+fun Context.startQrScannerActivity() {
+    startActivity(Intent(this, QrScannerActivity::class.java).setFlags(FLAG_ACTIVITY_NEW_TASK))
+}
 
 class QrScannerActivity : AppCompatActivity() {
 

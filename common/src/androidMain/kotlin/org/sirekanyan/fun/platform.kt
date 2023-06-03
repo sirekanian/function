@@ -1,19 +1,27 @@
 package org.sirekanyan.`fun`
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.graphics.Color
+import android.net.Uri
+import android.provider.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.platform.LocalContext
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import org.sirekanyan.`fun`.data.FunDatabase
-import org.sirekanyan.`fun`.mlkit.QrScannerActivity
+import org.sirekanyan.`fun`.mlkit.startQrScannerActivity
 import androidx.activity.compose.BackHandler as AndroidBackHandler
 import androidx.compose.foundation.layout.imePadding as androidImePadding
 import androidx.compose.foundation.layout.navigationBarsPadding as androidNavigationBarsPadding
@@ -40,15 +48,52 @@ actual fun BackHandler(enabled: Boolean, onBack: () -> Unit) {
 
 @Composable
 actual fun ScanButton() {
+    var isDialogVisible by remember { mutableStateOf(false) }
+    val permissions = rememberPermissions(Manifest.permission.CAMERA) { isGranted ->
+        if (isGranted) {
+            androidApplicationContext.startQrScannerActivity()
+        }
+    }
     TextButton(
         onClick = {
-            androidApplicationContext.startActivity(
-                Intent(androidApplicationContext, QrScannerActivity::class.java)
-                    .setFlags(FLAG_ACTIVITY_NEW_TASK)
-            )
+            when {
+                permissions.isGranted() -> androidApplicationContext.startQrScannerActivity()
+                permissions.shouldShowDialog() -> isDialogVisible = true
+                else -> permissions.launchPermissionRequest()
+            }
         },
     ) {
         Text("Scan")
+    }
+    if (isDialogVisible) {
+        AlertDialog(
+            title = { Text("Camera permission") },
+            text = { Text("Camera permission is required for scanning QR codes.") },
+            onDismissRequest = { isDialogVisible = false },
+            confirmButton = {
+                if (permissions.shouldShowRationale()) {
+                    TextButton(onClick = {
+                        isDialogVisible = false
+                        permissions.launchPermissionRequest()
+                    }) {
+                        Text("REQUEST")
+                    }
+                } else {
+                    val context = LocalContext.current
+                    TextButton(onClick = {
+                        isDialogVisible = false
+                        context.startActivity(
+                            Intent(
+                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.fromParts("package", context.packageName, null)
+                            )
+                        )
+                    }) {
+                        Text("OPEN SETTINGS")
+                    }
+                }
+            },
+        )
     }
 }
 
