@@ -6,10 +6,13 @@ CREATE TABLE IF NOT EXISTS item (
 );
 
 selectAll:
+SELECT * FROM item;
+
+selectLast:
 SELECT id, MAX(timestamp) AS timestamp, content FROM item GROUP BY id;
 
 insertItem:
-INSERT INTO item (id, timestamp, content) VALUES ?;
+INSERT OR IGNORE INTO item (id, timestamp, content) VALUES ?;
 
 deleteItem:
 DELETE FROM item WHERE id = ? AND timestamp = ?;

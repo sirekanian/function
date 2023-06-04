@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import org.sirekanyan.`fun`.api.FunApi
 import org.sirekanyan.`fun`.appbar.HorizontalAppBar
 import org.sirekanyan.`fun`.appbar.VerticalAppBar
 import org.sirekanyan.`fun`.data.FunRepository
@@ -39,14 +40,15 @@ fun App(screen: AppScreen, colorScheme: ColorScheme, windowSizeClass: WindowWidt
 private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSizeClass) {
     val state = remember { AppState(initialScreen) }
     val repository = remember { FunRepository() }
-    val items by remember { repository.observeItems() }.collectAsState(listOf())
+    val api = remember { FunApi(repository) }
+    val items by remember { repository.observeLastItems() }.collectAsState(listOf())
     AppLayout(
         state = state,
         windowSizeClass = windowSizeClass,
         content = {
             when (val screen = state.screen) {
                 is HomeScreen -> HomeContent(it, state, items)
-                is SyncScreen -> SyncContent(state, screen)
+                is SyncScreen -> SyncContent(state, screen, api)
                 is AddScreen -> AddContent(state, repository)
                 is EditScreen -> EditContent(state, screen, repository)
             }

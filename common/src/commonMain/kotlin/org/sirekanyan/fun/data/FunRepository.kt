@@ -13,11 +13,18 @@ class FunRepository {
     private val driver: SqlDriver = createSqlDriver()
     private val queries = FunDatabase(driver).itemQueries
 
-    fun observeItems(): Flow<List<Item>> =
-        queries.selectAll { id, timestamp, content -> Item(id, checkNotNull(timestamp), content) }.asFlow().mapToList()
+    fun getAllItems(): List<Item> =
+        queries.selectAll().executeAsList()
+
+    fun observeLastItems(): Flow<List<Item>> =
+        queries.selectLast { id, timestamp, content -> Item(id, checkNotNull(timestamp), content) }.asFlow().mapToList()
 
     fun putContent(id: String, content: String) {
         queries.insertItem(Item(id, currentTimeMillis(), content))
+    }
+
+    fun putItem(item: Item) {
+        queries.insertItem(item)
     }
 
     fun delete(id: String, timestamp: Long) {

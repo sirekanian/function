@@ -27,8 +27,7 @@ import org.sirekanyan.`fun`.systemBarsPadding
 import java.util.UUID
 
 @Composable
-fun SyncContent(state: AppState, screen: SyncScreen) {
-    val api = remember { FunApi() }
+fun SyncContent(state: AppState, screen: SyncScreen, api: FunApi) {
     val scannedPeerId = screen.peerUuid
     val hello: Hello? by remember {
         if (scannedPeerId == null) {
