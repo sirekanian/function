@@ -8,8 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import org.sirekanyan.`fun`.data.FunRepository
-import org.sirekanyan.`fun`.model.Hello
-import org.sirekanyan.`fun`.model.createHello
+import org.sirekanyan.`fun`.model.*
 
 private const val HOST = "fun.sirekanyan.org"
 private const val PORT = 8020
@@ -22,25 +21,27 @@ private val client = HttpClient {
 
 class FunApi(private val repository: FunRepository) {
 
-    fun receive(me: String): Flow<Hello> =
+    fun receive(me: String): Flow<SyncState> =
         flow {
             client.webSocket(HttpMethod.Get, HOST, PORT, "sync") {
                 sendSerialized(me)
                 val hello = receiveHello()
-                emit(hello)
+                emit(HelloReceived(hello))
                 sendHello(me, hello.from)
                 sendSerialized(Unit)
+                emit(SuccessSync(hello))
             }
         }
 
-    fun send(me: String, peer: String): Flow<Hello> =
+    fun send(me: String, peer: String): Flow<SyncState> =
         flow {
             client.webSocket(HttpMethod.Get, HOST, PORT, "sync") {
                 sendSerialized(me)
                 sendHello(me, peer)
                 val hello = receiveHello()
-                emit(hello)
+                emit(HelloReceived(hello))
                 sendSerialized(Unit)
+                emit(SuccessSync(hello))
             }
         }
 
