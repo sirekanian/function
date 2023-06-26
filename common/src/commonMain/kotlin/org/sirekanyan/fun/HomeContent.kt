@@ -39,9 +39,12 @@ fun HomeContent(paddings: PaddingValues, state: AppState, items: List<Item>) {
                         state.screen = EditScreen(item)
                     })
                     .padding(horizontal = 24.dp, vertical = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                Text(item.content)
+                Text(
+                    text = item.content,
+                    modifier = Modifier.weight(1f),
+                )
                 Text(
                     text = item.id.takeLast(6),
                     color = MaterialTheme.colorScheme.primary,
