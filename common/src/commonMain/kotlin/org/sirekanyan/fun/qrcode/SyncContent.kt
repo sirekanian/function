@@ -60,7 +60,8 @@ fun SyncContent(state: AppState, screen: SyncScreen, api: FunApi) {
                 Icon(
                     imageVector = Icons.Default.Done,
                     contentDescription = "Done",
-                    modifier = Modifier.padding(top = 32.dp)
+                    modifier = Modifier
+                        .padding(top = 32.dp)
                         .clip(RoundedCornerShape(32.dp))
                         .size(64.dp)
                         .background(MaterialTheme.colorScheme.tertiary)
