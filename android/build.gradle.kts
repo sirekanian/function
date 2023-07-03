@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.sirekanyan"
-version = "0.1.0"
+version = property("appVersionName") as String
 
 dependencies {
     implementation(project(":common"))
@@ -20,8 +20,9 @@ android {
         applicationId = "org.sirekanyan.fun"
         minSdk = 21
         targetSdk = 33
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = (property("appVersionCode") as String).toInt()
+        versionName = property("appVersionName") as String
+        setProperty("archivesBaseName", "$applicationId-$versionName-$versionCode")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

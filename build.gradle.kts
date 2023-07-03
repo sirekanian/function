@@ -1,5 +1,5 @@
 group = "org.sirekanyan"
-version = "0.1.0"
+version = property("appVersionName") as String
 
 allprojects {
     repositories {
