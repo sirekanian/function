@@ -33,7 +33,13 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"))
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
         }
     }
 }
