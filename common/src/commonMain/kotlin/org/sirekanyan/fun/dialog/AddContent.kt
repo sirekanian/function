@@ -44,6 +44,6 @@ fun AddContent(state: AppState, repository: FunRepository) {
                 }
             },
         )
-        BoxedTextField(value = draft, onValueChange = { draft = it })
+        BoxedTextField(value = draft, onValueChange = { draft = it }, readOnly = false)
     }
 }

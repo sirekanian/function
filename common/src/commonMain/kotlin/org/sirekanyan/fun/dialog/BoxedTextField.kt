@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.imePadding
 
 @Composable
-fun BoxedTextField(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+fun BoxedTextField(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit, readOnly: Boolean) {
     val focusRequester = remember { FocusRequester() }
     Box(Modifier.fillMaxSize().padding(24.dp)) {
         @OptIn(ExperimentalMaterial3Api::class)
@@ -29,6 +29,7 @@ fun BoxedTextField(value: TextFieldValue, onValueChange: (TextFieldValue) -> Uni
                 .imePadding()
                 .focusRequester(focusRequester),
             placeholder = { Text("Put something here...") },
+            readOnly = readOnly,
         )
     }
     LaunchedEffect(Unit) {

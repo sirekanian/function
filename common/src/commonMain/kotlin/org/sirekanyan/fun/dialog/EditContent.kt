@@ -4,14 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
@@ -34,9 +29,17 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
-            title = "Edit function",
+            title = if (screen.readOnly) "Show function" else "Edit function",
             action = {
-                if (draft.text.isEmpty()) {
+                if (screen.readOnly) {
+                    IconButton(
+                        onClick = {
+                            screen.readOnly = false
+                        },
+                    ) {
+                        Icon(Icons.Default.Edit, null)
+                    }
+                } else if (draft.text.isEmpty()) {
                     TextButton(
                         onClick = {
                             repository.delete(item.id, item.timestamp)
@@ -58,6 +61,6 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
                 }
             },
         )
-        BoxedTextField(value = draft, onValueChange = { draft = it })
+        BoxedTextField(value = draft, onValueChange = { draft = it }, readOnly = screen.readOnly)
     }
 }

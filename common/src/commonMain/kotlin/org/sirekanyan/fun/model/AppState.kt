@@ -33,4 +33,6 @@ class SyncScreen(initialPeerUuid: UUID?) : AppScreen() {
 
 object AddScreen : AppScreen()
 
-class EditScreen(val initialItem: Item) : AppScreen()
+class EditScreen(val initialItem: Item) : AppScreen() {
+    var readOnly by mutableStateOf(true)
+}

@@ -44,6 +44,7 @@ fun HomeContent(paddings: PaddingValues, state: AppState, items: List<Item>) {
                 Text(
                     text = item.content,
                     modifier = Modifier.weight(1f),
+                    maxLines = 1,
                 )
                 Text(
                     text = item.id.takeLast(6),
