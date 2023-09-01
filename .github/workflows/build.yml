@@ -27,10 +27,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - shell: bash
-        run: ./gradlew assembleRelease bundleRelease
+        run: ./gradlew android:assembleRelease android:bundleRelease desktop:packageReleaseDeb
       - if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            app/build/outputs/apk/release/*-release*.apk
-            app/build/outputs/bundle/release/*-release*.aab
+            android/build/outputs/apk/*/release/*-release*.apk
+            android/build/outputs/bundle/*Release/*-release*.aab
+            desktop/build/compose/binaries/main-release/deb/*.deb
