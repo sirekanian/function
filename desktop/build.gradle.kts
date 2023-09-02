@@ -29,9 +29,9 @@ compose {
         application {
             mainClass = "org.sirekanyan.fun.Main"
             nativeDistributions {
-                targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-                packageName = "fun"
-                packageVersion = "1.0.0"
+                targetFormats(TargetFormat.Deb)
+                packageName = "function"
+                packageVersion = property("appVersionName") as String
             }
         }
     }

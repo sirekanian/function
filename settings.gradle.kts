@@ -6,5 +6,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "fun"
+rootProject.name = "function"
 include(":android", ":desktop", ":common", ":mlkit")
