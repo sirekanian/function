@@ -19,11 +19,11 @@ kotlin {
 
 android {
     namespace = "org.sirekanyan.fun"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "org.sirekanyan"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = (property("appVersionCode") as String).toInt()
         versionName = property("appVersionName") as String
         setProperty("archivesBaseName", "$applicationId-$versionName-$versionCode")
