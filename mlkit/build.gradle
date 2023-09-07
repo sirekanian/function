@@ -2,6 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'org.sirekanyan.version-checker'
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace 'org.sirekanyan.fun.mlkit'
     compileSdkVersion 33
@@ -12,8 +16,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlin {
-        jvmToolchain(11)
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 

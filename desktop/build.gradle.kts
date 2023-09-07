@@ -10,8 +10,8 @@ group = "org.sirekanyan"
 version = property("appVersionName") as String
 
 kotlin {
+    jvmToolchain(17)
     jvm {
-        jvmToolchain(11)
         withJava()
     }
     sourceSets {

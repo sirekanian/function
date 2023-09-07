@@ -11,10 +11,15 @@ group = "org.sirekanyan"
 version = property("appVersionName") as String
 
 kotlin {
-    android()
-    jvm("desktop") {
-        jvmToolchain(11)
+    jvmToolchain(17)
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "11"
+            }
+        }
     }
+    jvm("desktop")
     sourceSets {
         val commonMain by getting {
             dependencies {

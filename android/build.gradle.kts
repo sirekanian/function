@@ -13,6 +13,10 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.7.2")
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace = "org.sirekanyan.fun"
     compileSdk = 33
@@ -39,8 +43,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlin {
-        jvmToolchain(11)
+    kotlinOptions {
+        jvmTarget = "11"
     }
     buildTypes {
         getByName("release") {
