@@ -3,7 +3,7 @@ package org.sirekanyan.`fun`
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
 
 expect val platformName: String
 

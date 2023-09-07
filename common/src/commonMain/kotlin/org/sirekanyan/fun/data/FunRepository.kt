@@ -1,8 +1,9 @@
 package org.sirekanyan.`fun`.data
 
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.db.SqlDriver
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import org.sirekanyan.`fun`.createSqlDriver
 import org.sirekanyan.`fun`.model.Item
@@ -17,7 +18,8 @@ class FunRepository {
         queries.selectAll().executeAsList()
 
     fun observeLastItems(): Flow<List<Item>> =
-        queries.selectLast { id, timestamp, content -> Item(id, checkNotNull(timestamp), content) }.asFlow().mapToList()
+        queries.selectLast { id, timestamp, content -> Item(id, checkNotNull(timestamp), content) }
+            .asFlow().mapToList(Dispatchers.IO)
 
     fun putContent(id: String, content: String) {
         queries.insertItem(Item(id, currentTimeMillis(), content))

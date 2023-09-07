@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalContext
-import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import org.sirekanyan.`fun`.data.FunDatabase
 import org.sirekanyan.`fun`.mlkit.startQrScannerActivity
 import androidx.activity.compose.BackHandler as AndroidBackHandler

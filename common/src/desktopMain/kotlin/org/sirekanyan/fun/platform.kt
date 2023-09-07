@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asSkiaBitmap
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import org.sirekanyan.`fun`.data.FunDatabase
 
 actual val platformName: String = "Desktop"
