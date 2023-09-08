@@ -1,7 +1,6 @@
 package org.sirekanyan.`fun`
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,11 +32,9 @@ fun HomeContent(paddings: PaddingValues, state: AppState, items: List<Item>) {
     ) {
         items.forEach { item ->
             Row(
-                modifier = @OptIn(ExperimentalFoundationApi::class) Modifier
+                modifier = Modifier
                     .fillMaxWidth()
-                    .combinedClickable(onClick = {}, onLongClick = {
-                        state.screen = EditScreen(item)
-                    })
+                    .clickable { state.screen = EditScreen(item) }
                     .padding(horizontal = 24.dp, vertical = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
