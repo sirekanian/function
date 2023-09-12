@@ -45,7 +45,7 @@ fun BoxedTextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
-            readOnly = readOnly,
+            enabled = !readOnly,
             textStyle = MaterialTheme.typography.bodyLarge.copy(LocalContentColor.current),
             cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         )
