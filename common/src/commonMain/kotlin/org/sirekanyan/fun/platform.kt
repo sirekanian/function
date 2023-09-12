@@ -19,6 +19,8 @@ expect fun Modifier.imePadding(): Modifier
 
 expect fun Modifier.systemBarsPadding(): Modifier
 
+expect fun Modifier.statusBarsPadding(): Modifier
+
 expect fun Modifier.navigationBarsPadding(): Modifier
 
 expect fun isFunctionFlavor(): Boolean

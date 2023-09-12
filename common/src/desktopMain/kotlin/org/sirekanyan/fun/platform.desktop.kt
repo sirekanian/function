@@ -36,6 +36,9 @@ actual fun Modifier.imePadding(): Modifier =
 actual fun Modifier.systemBarsPadding(): Modifier =
     this // not applicable for this platform
 
+actual fun Modifier.statusBarsPadding(): Modifier =
+    this // not applicable for this platform
+
 actual fun Modifier.navigationBarsPadding(): Modifier =
     this // not applicable for this platform
 

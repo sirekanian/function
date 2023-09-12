@@ -27,6 +27,7 @@ import androidx.activity.compose.BackHandler as AndroidBackHandler
 import androidx.compose.foundation.layout.imePadding as androidImePadding
 import androidx.compose.foundation.layout.navigationBarsPadding as androidNavigationBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding as androidSystemBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding as androidStatusBarsPadding
 
 actual fun ImageBitmap.installMonochromePixels(pixels: BooleanArray) {
     val colors = IntArray(pixels.size) { index ->
@@ -101,6 +102,9 @@ actual fun Modifier.imePadding(): Modifier =
 
 actual fun Modifier.systemBarsPadding(): Modifier =
     androidSystemBarsPadding()
+
+actual fun Modifier.statusBarsPadding(): Modifier =
+    androidStatusBarsPadding()
 
 actual fun Modifier.navigationBarsPadding(): Modifier =
     androidNavigationBarsPadding()
