@@ -3,7 +3,9 @@ package org.sirekanyan.`fun`.dialog
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -20,7 +22,12 @@ import org.sirekanyan.`fun`.imePadding
 @Composable
 fun BoxedTextField(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit, readOnly: Boolean) {
     val focusRequester = remember { FocusRequester() }
-    Box(Modifier.fillMaxSize().padding(24.dp)) {
+    Box(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
+            .padding(24.dp),
+    ) {
         BasicTextField(
             value = value,
             onValueChange = onValueChange,
