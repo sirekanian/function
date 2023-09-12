@@ -49,7 +49,7 @@ private fun AppContent(initialScreen: AppScreen, windowSizeClass: WindowWidthSiz
             when (val screen = state.screen) {
                 is HomeScreen -> HomeContent(it, state, items)
                 is SyncScreen -> SyncContent(state, screen, api)
-                is AddScreen -> AddContent(state, repository)
+                is AddScreen -> AddContent(state, screen, repository)
                 is EditScreen -> EditContent(state, screen, repository)
             }
         },

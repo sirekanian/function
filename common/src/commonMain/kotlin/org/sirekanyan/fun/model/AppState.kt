@@ -1,9 +1,11 @@
 package org.sirekanyan.`fun`.model
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.dp
 import java.util.UUID
 
 class AppState(initialScreen: AppScreen) {
@@ -31,8 +33,16 @@ class SyncScreen(initialPeerUuid: UUID?) : AppScreen() {
     val peerUuid: UUID? by mutableStateOf(initialPeerUuid)
 }
 
-object AddScreen : AppScreen()
+object AddScreen : AppScreen() {
+    val toolbar = ToolbarState()
+}
 
 class EditScreen(val initialItem: Item) : AppScreen() {
     var readOnly by mutableStateOf(true)
+    val toolbar = ToolbarState()
+}
+
+class ToolbarState {
+    val scrollState = ScrollState(initial = 0)
+    val elevation by derivedStateOf { if (scrollState.value == 0) 0.dp else 3.dp }
 }

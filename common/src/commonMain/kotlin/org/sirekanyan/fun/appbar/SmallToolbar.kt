@@ -1,5 +1,6 @@
 package org.sirekanyan.`fun`.appbar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,10 +13,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.D
 import org.sirekanyan.`fun`.statusBarsPadding
@@ -25,10 +28,13 @@ fun SmallToolbar(
     icon: ImageVector,
     onIconClick: () -> Unit,
     title: String,
+    elevation: Dp,
     action: @Composable (() -> Unit)? = null,
 ) {
+    val toolbarColor = MaterialTheme.colorScheme.surfaceColorAtElevation(elevation)
     Row(
         modifier = Modifier
+            .background(toolbarColor.copy(alpha = 0.98f))
             .fillMaxWidth()
             .statusBarsPadding()
             .height(D.smallToolbarSize),

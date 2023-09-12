@@ -16,22 +16,24 @@ import androidx.compose.ui.text.input.TextFieldValue
 import org.sirekanyan.`fun`.BackHandler
 import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.data.FunRepository
+import org.sirekanyan.`fun`.model.AddScreen
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.HomeScreen
 import java.util.*
 
 @Composable
-fun AddContent(state: AppState, repository: FunRepository) {
+fun AddContent(state: AppState, screen: AddScreen, repository: FunRepository) {
     var draft by remember { mutableStateOf(TextFieldValue("")) }
     BackHandler {
         state.screen = HomeScreen
     }
     Box(Modifier.fillMaxSize()) {
-        BoxedTextField(value = draft, onValueChange = { draft = it }, readOnly = false)
+        BoxedTextField(draft, { draft = it }, readOnly = false, scrollState = screen.toolbar.scrollState)
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
             title = "Add function",
+            elevation = screen.toolbar.elevation,
             action = {
                 TextButton(
                     onClick = {

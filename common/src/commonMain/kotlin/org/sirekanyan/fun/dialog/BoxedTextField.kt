@@ -1,10 +1,10 @@
 package org.sirekanyan.`fun`.dialog
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.LocalContentColor
@@ -23,11 +23,16 @@ import org.sirekanyan.`fun`.imePadding
 import org.sirekanyan.`fun`.systemBarsPadding
 
 @Composable
-fun BoxedTextField(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit, readOnly: Boolean) {
+fun BoxedTextField(
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit,
+    readOnly: Boolean,
+    scrollState: ScrollState,
+) {
     val focusRequester = remember { FocusRequester() }
     Box(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
             .fillMaxSize()
             .systemBarsPadding()
             .imePadding()

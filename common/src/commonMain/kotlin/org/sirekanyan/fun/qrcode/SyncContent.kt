@@ -43,6 +43,7 @@ fun SyncContent(state: AppState, screen: SyncScreen, api: FunApi) {
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
             title = "Synchronization",
+            elevation = 0.dp,
             action = { ScanButton() },
         )
         Column(

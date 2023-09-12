@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import org.sirekanyan.`fun`.BackHandler
 import org.sirekanyan.`fun`.appbar.SmallToolbar
@@ -20,16 +19,17 @@ import org.sirekanyan.`fun`.model.HomeScreen
 @Composable
 fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) {
     val item = screen.initialItem
-    var draft by remember { mutableStateOf(TextFieldValue(item.content, TextRange(Int.MAX_VALUE))) }
+    var draft by remember { mutableStateOf(TextFieldValue(item.content)) }
     BackHandler {
         state.screen = HomeScreen
     }
     Box(Modifier.fillMaxSize()) {
-        BoxedTextField(value = draft, onValueChange = { draft = it }, readOnly = screen.readOnly)
+        BoxedTextField(draft, { draft = it }, readOnly = screen.readOnly, scrollState = screen.toolbar.scrollState)
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
             title = if (screen.readOnly) "Show function" else "Edit function",
+            elevation = screen.toolbar.elevation,
             action = {
                 if (screen.readOnly) {
                     IconButton(
