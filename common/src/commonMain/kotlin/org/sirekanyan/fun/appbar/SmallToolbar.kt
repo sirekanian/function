@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.D
+import org.sirekanyan.`fun`.statusBarsPadding
 
 @Composable
 fun SmallToolbar(
@@ -27,7 +28,10 @@ fun SmallToolbar(
     action: @Composable (() -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().height(D.smallToolbarSize),
+        modifier = Modifier
+            .fillMaxWidth()
+            .statusBarsPadding()
+            .height(D.smallToolbarSize),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         IconButton(

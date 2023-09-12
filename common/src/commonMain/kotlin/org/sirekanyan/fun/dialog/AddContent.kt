@@ -1,6 +1,6 @@
 package org.sirekanyan.`fun`.dialog
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -18,7 +18,6 @@ import org.sirekanyan.`fun`.appbar.SmallToolbar
 import org.sirekanyan.`fun`.data.FunRepository
 import org.sirekanyan.`fun`.model.AppState
 import org.sirekanyan.`fun`.model.HomeScreen
-import org.sirekanyan.`fun`.systemBarsPadding
 import java.util.*
 
 @Composable
@@ -27,7 +26,8 @@ fun AddContent(state: AppState, repository: FunRepository) {
     BackHandler {
         state.screen = HomeScreen
     }
-    Column(Modifier.fillMaxSize().systemBarsPadding()) {
+    Box(Modifier.fillMaxSize()) {
+        BoxedTextField(value = draft, onValueChange = { draft = it }, readOnly = false)
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
@@ -44,6 +44,5 @@ fun AddContent(state: AppState, repository: FunRepository) {
                 }
             },
         )
-        BoxedTextField(value = draft, onValueChange = { draft = it }, readOnly = false)
     }
 }
