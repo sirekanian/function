@@ -20,14 +20,13 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalContext
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import org.sirekanyan.`fun`.common.BuildConfig
 import org.sirekanyan.`fun`.data.FunDatabase
 import org.sirekanyan.`fun`.mlkit.startQrScannerActivity
 import androidx.activity.compose.BackHandler as AndroidBackHandler
 import androidx.compose.foundation.layout.imePadding as androidImePadding
 import androidx.compose.foundation.layout.navigationBarsPadding as androidNavigationBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding as androidSystemBarsPadding
-
-actual val platformName: String = "Android"
 
 actual fun ImageBitmap.installMonochromePixels(pixels: BooleanArray) {
     val colors = IntArray(pixels.size) { index ->
@@ -105,3 +104,7 @@ actual fun Modifier.systemBarsPadding(): Modifier =
 
 actual fun Modifier.navigationBarsPadding(): Modifier =
     androidNavigationBarsPadding()
+
+@Suppress("KotlinConstantConditions")
+actual fun isFunctionFlavor(): Boolean =
+    BuildConfig.FLAVOR == "function"

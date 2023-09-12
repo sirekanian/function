@@ -43,11 +43,13 @@ fun HomeContent(paddings: PaddingValues, state: AppState, items: List<Item>) {
                     modifier = Modifier.weight(1f),
                     maxLines = 1,
                 )
-                Text(
-                    text = item.id.takeLast(6),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontFamily = FontFamily.Monospace,
-                )
+                if (isFunctionFlavor()) {
+                    Text(
+                        text = item.id.takeLast(6),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontFamily = FontFamily.Monospace,
+                    )
+                }
             }
         }
     }

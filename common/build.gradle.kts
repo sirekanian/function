@@ -54,9 +54,18 @@ android {
     defaultConfig {
         minSdk = 21
     }
+    flavorDimensionList += "type"
+    productFlavors {
+        create("function") { dimension = "type" }
+        create("cookbook") { dimension = "type" }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    @Suppress("UnstableApiUsage")
+    buildFeatures {
+        buildConfig = true
     }
 }
 

@@ -8,8 +8,6 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import org.sirekanyan.`fun`.data.FunDatabase
 
-actual val platformName: String = "Desktop"
-
 actual fun ImageBitmap.installMonochromePixels(pixels: BooleanArray) {
     val bytes = ByteArray(pixels.size * 4) { index ->
         if (pixels[index / 4] && index % 4 > 2) -1 else 0
@@ -40,3 +38,6 @@ actual fun Modifier.systemBarsPadding(): Modifier =
 
 actual fun Modifier.navigationBarsPadding(): Modifier =
     this // not applicable for this platform
+
+actual fun isFunctionFlavor(): Boolean =
+    false

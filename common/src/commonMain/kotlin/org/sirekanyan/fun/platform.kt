@@ -5,8 +5,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import app.cash.sqldelight.db.SqlDriver
 
-expect val platformName: String
-
 expect fun ImageBitmap.installMonochromePixels(pixels: BooleanArray)
 
 expect fun createSqlDriver(): SqlDriver
@@ -22,3 +20,5 @@ expect fun Modifier.imePadding(): Modifier
 expect fun Modifier.systemBarsPadding(): Modifier
 
 expect fun Modifier.navigationBarsPadding(): Modifier
+
+expect fun isFunctionFlavor(): Boolean
