@@ -50,7 +50,9 @@ fun BoxedTextField(
             cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         )
     }
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
+    LaunchedEffect(readOnly) {
+        if (!readOnly) {
+            focusRequester.requestFocus()
+        }
     }
 }
