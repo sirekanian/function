@@ -52,6 +52,7 @@ fun BoxedTextField(
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             enabled = !readOnly,
+            readOnly = readOnly,
             textStyle = if ('\n' in value.text) bodyStyle else titleStyle, // workaround to fix cursor size
             cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
             visualTransformation = { input ->
