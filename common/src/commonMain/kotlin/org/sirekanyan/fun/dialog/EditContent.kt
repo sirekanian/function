@@ -1,5 +1,8 @@
 package org.sirekanyan.`fun`.dialog
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -8,6 +11,8 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import org.sirekanyan.`fun`.BackHandler
@@ -28,7 +33,20 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
     BackHandler {
         state.screen = HomeScreen
     }
-    Box(Modifier.fillMaxSize()) {
+    val haptics = LocalHapticFeedback.current
+    Box(
+        modifier = @OptIn(ExperimentalFoundationApi::class) Modifier
+            .fillMaxSize()
+            .combinedClickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = {},
+                onLongClick = {
+                    screen.readOnly = false
+                    haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                },
+            ),
+    ) {
         BoxedTextField(draft, { draft = it }, readOnly = screen.readOnly, scrollState = screen.toolbar.scrollState)
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
