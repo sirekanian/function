@@ -32,17 +32,18 @@ fun AddContent(state: AppState, screen: AddScreen, repository: FunRepository) {
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
-            title = "Add function",
+            title = "",
             elevation = screen.toolbar.elevation,
             action = {
-                TextButton(
-                    onClick = {
-                        repository.putContent(UUID.randomUUID().toString(), draft.text)
-                        state.screen = HomeScreen
-                    },
-                    enabled = draft.text.isNotEmpty()
-                ) {
-                    Text("Save")
+                if (draft.text.isNotEmpty()) {
+                    TextButton(
+                        onClick = {
+                            repository.putContent(UUID.randomUUID().toString(), draft.text)
+                            state.screen = HomeScreen
+                        },
+                    ) {
+                        Text("Save")
+                    }
                 }
             },
         )
