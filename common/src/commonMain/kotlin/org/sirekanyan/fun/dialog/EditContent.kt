@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -29,13 +30,22 @@ import org.sirekanyan.`fun`.model.HomeScreen
 @Composable
 fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) {
     val item = screen.initialItem
-    var draft by remember {
-        val content = item.content
-        val index = content.indexOf('\n').takeIf { it >= 0 } ?: Int.MAX_VALUE
-        mutableStateOf(TextFieldValue(content, TextRange(index)))
+    val initialContent = item.content
+    val initialDraft = remember {
+        val index = initialContent.indexOf('\n').takeIf { it >= 0 } ?: Int.MAX_VALUE
+        TextFieldValue(initialContent, TextRange(index))
+    }
+    var draft by remember { mutableStateOf(initialDraft) }
+    fun onBack() {
+        if (screen.readOnly) {
+            state.screen = HomeScreen
+        } else {
+            draft = initialDraft // todo: ask user for confirmation
+            screen.readOnly = true
+        }
     }
     BackHandler {
-        state.screen = HomeScreen
+        onBack()
     }
     val haptics = LocalHapticFeedback.current
     val borderColor = if (screen.readOnly) Color.Transparent else MaterialTheme.colorScheme.primary
@@ -56,8 +66,8 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
     ) {
         BoxedTextField(draft, { draft = it }, readOnly = screen.readOnly, scrollState = screen.toolbar.scrollState)
         SmallToolbar(
-            icon = Icons.Default.ArrowBack,
-            onIconClick = { state.screen = HomeScreen },
+            icon = if (screen.readOnly) Icons.Default.ArrowBack else Icons.Default.Close,
+            onIconClick = { onBack() },
             title = if (screen.toolbar.isTop) "" else draft.text.substringBefore('\n'),
             elevation = screen.toolbar.elevation,
             action = {
@@ -84,7 +94,7 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
                             repository.putContent(item.id, draft.text)
                             state.screen = HomeScreen
                         },
-                        enabled = item.content != draft.text,
+                        enabled = initialContent != draft.text,
                     ) {
                         Text("Save")
                     }
