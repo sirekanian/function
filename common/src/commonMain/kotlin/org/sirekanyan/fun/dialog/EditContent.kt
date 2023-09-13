@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
@@ -36,10 +37,12 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
         TextFieldValue(initialContent, TextRange(index))
     }
     var draft by remember { mutableStateOf(initialDraft) }
+    val focusManager = LocalFocusManager.current
     fun onBack() {
         if (screen.readOnly) {
             state.screen = HomeScreen
         } else {
+            focusManager.clearFocus()
             draft = initialDraft // todo: ask user for confirmation
             screen.readOnly = true
         }
