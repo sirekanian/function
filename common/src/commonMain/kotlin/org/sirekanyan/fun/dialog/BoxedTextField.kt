@@ -16,7 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import org.sirekanyan.`fun`.D
 import org.sirekanyan.`fun`.imePadding
@@ -29,6 +33,8 @@ fun BoxedTextField(
     readOnly: Boolean,
     scrollState: ScrollState,
 ) {
+    val titleStyle = MaterialTheme.typography.displaySmall.copy(LocalContentColor.current)
+    val bodyStyle = MaterialTheme.typography.bodyLarge.copy(LocalContentColor.current)
     val focusRequester = remember { FocusRequester() }
     Box(
         modifier = Modifier
@@ -46,8 +52,33 @@ fun BoxedTextField(
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             enabled = !readOnly,
-            textStyle = MaterialTheme.typography.bodyLarge.copy(LocalContentColor.current),
+            textStyle = if ('\n' in value.text) bodyStyle else titleStyle, // workaround to fix cursor size
             cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+            visualTransformation = { input ->
+                TransformedText(
+                    text = buildAnnotatedString {
+                        if ('\n' in input.text) {
+                            withStyle(titleStyle.toParagraphStyle()) {
+                                withStyle(titleStyle.toSpanStyle()) {
+                                    appendLine(input.text.substringBefore('\n'))
+                                }
+                            }
+                            withStyle(bodyStyle.toParagraphStyle()) {
+                                withStyle(bodyStyle.toSpanStyle()) {
+                                    append(input.text.substringAfter('\n'))
+                                }
+                            }
+                        } else {
+                            withStyle(titleStyle.toParagraphStyle()) {
+                                withStyle(titleStyle.toSpanStyle()) {
+                                    append(input.text)
+                                }
+                            }
+                        }
+                    },
+                    offsetMapping = OffsetMapping.Identity,
+                )
+            }
         )
     }
     LaunchedEffect(readOnly) {
