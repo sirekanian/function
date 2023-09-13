@@ -58,7 +58,7 @@ fun EditContent(state: AppState, screen: EditScreen, repository: FunRepository) 
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
-            title = "",
+            title = if (screen.toolbar.isTop) "" else draft.text.substringBefore('\n'),
             elevation = screen.toolbar.elevation,
             action = {
                 if (screen.readOnly) {

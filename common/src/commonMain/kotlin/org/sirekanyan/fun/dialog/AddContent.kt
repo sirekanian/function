@@ -32,7 +32,7 @@ fun AddContent(state: AppState, screen: AddScreen, repository: FunRepository) {
         SmallToolbar(
             icon = Icons.Default.ArrowBack,
             onIconClick = { state.screen = HomeScreen },
-            title = "",
+            title = if (screen.toolbar.isTop) "" else draft.text.substringBefore('\n'),
             elevation = screen.toolbar.elevation,
             action = {
                 if (draft.text.isNotEmpty()) {

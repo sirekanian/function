@@ -44,5 +44,6 @@ class EditScreen(val initialItem: Item) : AppScreen() {
 
 class ToolbarState {
     val scrollState = ScrollState(initial = 0)
-    val elevation by derivedStateOf { if (scrollState.value == 0) 0.dp else 3.dp }
+    val isTop by derivedStateOf { scrollState.value == 0 }
+    val elevation by derivedStateOf { if (isTop) 0.dp else 3.dp }
 }
